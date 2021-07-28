@@ -1,14 +1,11 @@
 import React from 'react';
+import {NavLink} from "react-router-dom";
 
 const Button = ({btnStyle}) => {
 
-    const openBasket = (event) => {
-        event.preventDefault()
-        console.log('hello')
-    }
-
     return (
-        <button className={`button ${btnStyle}`} onClick={(event) => openBasket(event)}>
+        <NavLink to={'/cart'}>
+        <button className={`button ${btnStyle}`}>
                 <span>520 ₽</span>
                 <div className="button__delimiter"></div>
                 <svg
@@ -42,6 +39,7 @@ const Button = ({btnStyle}) => {
                 </svg>
                 <span>3</span>
         </button>
+        </NavLink>
     );
 };
 

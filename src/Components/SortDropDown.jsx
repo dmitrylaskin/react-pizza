@@ -1,21 +1,34 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 const SortDropDown = ({dropDownToggle, visibleDropDown}) => {
 
     const sortTypeItems = ['популярности', 'цене', 'алфавиту']
 
-    const [activeSortType, setActiveSortType] = useState('популярности')
+    const [activeSortType, setActiveSortType] = useState(sortTypeItems[0])
 
     const sortTypeClickHandler = (sortItemName) => {
         setActiveSortType(sortItemName)
-        dropDownToggle()
-
+        dropDownToggle(false)
     }
 
+    const sortRef = useRef()
+
+    const handleOutsideClick = (event) => {
+        if (!event.path.includes(sortRef.current)) {
+            dropDownToggle(false)
+        }
+    }
+
+    useEffect(() => {
+        document.body.addEventListener('click', handleOutsideClick)
+    }, [])
+
+
     return (
-        <div className="sort">
+        <div className="sort" ref={elem => sortRef.current = elem}>
             <div className="sort__label">
                 <svg
+                    className={visibleDropDown ? 'rotated' : ''}
                     width="10"
                     height="6"
                     viewBox="0 0 10 6"
@@ -28,7 +41,7 @@ const SortDropDown = ({dropDownToggle, visibleDropDown}) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={dropDownToggle}>{activeSortType}</span>
+                <span onClick={() => dropDownToggle(!visibleDropDown)}>{activeSortType}</span>
             </div>
             {visibleDropDown && <div className="sort__popup">
                 <ul>

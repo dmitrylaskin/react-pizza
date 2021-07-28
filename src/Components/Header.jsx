@@ -1,12 +1,15 @@
 import React from 'react';
 import logo from "../assets/img/pizza-logo.svg";
 import Button from "./Button";
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
     return (
         <div>
             <div className="header">
                 <div className="container">
+
+                    <NavLink to={'/home'}>
                     <div className="header__logo">
                         <img width="38" src={logo} alt="Pizza logo"/>
                         <div>
@@ -14,6 +17,8 @@ const Header = () => {
                             <p>самая вкусная пицца во вселенной</p>
                         </div>
                     </div>
+                    </NavLink>
+
                     <div className="header__cart">
 
                         <Button btnStyle={'button--cart'}/>
