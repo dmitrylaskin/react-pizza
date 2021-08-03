@@ -3,14 +3,16 @@ import Header from "./Components/Header";
 import Home from "./Components/Home";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Cart from "./Components/Cart";
+import {setVisibleDropDown} from "./Components/Redux/home-reducer";
+import {connect} from "react-redux";
 
 
-function App() {
+function App({setVisibleDropDown, visibleDropDown}) {
     
     const categoryItems = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
 
   const [activeCategory, setActiveCategory] = useState(categoryItems[0])
-  const [visibleDropDown, setVisibleDropDown] = useState(false)
+  //const [visibleDropDown, setVisibleDropDown] = useState(false)
 
   const categoryToggle = (categoryName) => {
     setActiveCategory(categoryName)
@@ -35,11 +37,16 @@ function App() {
       <div className="wrapper">
 
         <Header/>
+        
 
         <div className="content">
             <Switch>
                 <Route exact path='/' render={() => <Redirect to={'/home'}/>}/>
-                <Route path='/home' render={() => <Home pizzaItems={pizzaItems} activeCategory={activeCategory} visibleDropDown={visibleDropDown} categoryToggle={categoryToggle} dropDownToggle={dropDownToggle}/>}/>
+                <Route path='/home' render={() => <Home pizzaItems={pizzaItems}
+                                                        activeCategory={activeCategory}
+                                                        visibleDropDown={visibleDropDown}
+                                                        categoryToggle={categoryToggle}
+                                                        dropDownToggle={dropDownToggle}/>}/>
                 <Route path='/cart' render={() => <Cart/>}/>
                 <Route path='*' render={() => <div><b>404 not found</b></div>}/>
             </Switch>
@@ -50,4 +57,12 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+
+    return {
+        visibleDropDown: state.homePage.visibleDropDown
+    }
+}
+
+
+export default connect(mapStateToProps,{setVisibleDropDown})(App);
