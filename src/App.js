@@ -3,9 +3,8 @@ import Header from "./Components/Header";
 import Home from "./Components/Home";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Cart from "./Components/Cart";
-import {setPizzaItems} from "./Components/Redux/home-reducer";
+import {getPizzaItems} from "./Components/Redux/home-reducer";
 import {useDispatch} from "react-redux";
-import {homeAPI} from "./Api/api";
 
 
 const App = () => {
@@ -13,12 +12,7 @@ const App = () => {
     const dispatch = useDispatch()
 
   useEffect(() => {
-
-      const fetchData = async () => {
-          let response = await homeAPI.getPizzas()
-          dispatch(setPizzaItems(response.data))
-      }
-      fetchData()
+      dispatch(getPizzaItems())
   }, [])
 
   return (

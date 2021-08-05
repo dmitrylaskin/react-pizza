@@ -45,7 +45,7 @@ const SortDropDown = ({dropDownToggle, visibleDropDown}) => {
             </div>
             {visibleDropDown && <div className="sort__popup">
                 <ul>
-                    {sortTypeItems.map(sortItemName => <li onClick={() => sortTypeClickHandler(sortItemName)} className={activeSortType === sortItemName ? "active" : ""} key={sortItemName}>{sortItemName}</li>)}
+                    {sortTypeItems && sortTypeItems.map(sortItemName => <li onClick={() => sortTypeClickHandler(sortItemName)} className={activeSortType === sortItemName ? "active" : ""} key={sortItemName}>{sortItemName}</li>)}
                 </ul>
             </div>}
         </div>
