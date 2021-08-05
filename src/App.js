@@ -5,6 +5,7 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import Cart from "./Components/Cart";
 import {setPizzaItems} from "./Components/Redux/home-reducer";
 import {useDispatch} from "react-redux";
+import {homeAPI} from "./Api/api";
 
 
 const App = () => {
@@ -12,10 +13,10 @@ const App = () => {
     const dispatch = useDispatch()
 
   useEffect(() => {
+
       const fetchData = async () => {
-          let response = await fetch('http://localhost:3000/db.json')
-          let data = await response.json()
-          dispatch(setPizzaItems(data.pizzas))
+          let response = await homeAPI.getPizzas()
+          dispatch(setPizzaItems(response.data))
       }
       fetchData()
   }, [])
