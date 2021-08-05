@@ -7,6 +7,4 @@ let rootReducer = combineReducers({
 
 let store = createStore(rootReducer)
 
-window.store = store.getState()
-
 export default store

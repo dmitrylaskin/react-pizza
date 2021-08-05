@@ -1,24 +1,37 @@
 const VISIBLE_DROPDOWN = 'VISIBLE_DROPDOWN'
+const SET_ACTIVE_CATEGORY = 'SET_ACTIVE_CATEGORY'
+const SET_PIZZA_ITEMS = 'SET_PIZZA_ITEMS'
 
 const initialState = {
-    visibleDropDown: false
+    visibleDropDown: false,
+    categoryItems: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'],
+    activeCategory: null,
+    pizzaItems: null
 }
 
 const homeReducer = (state = initialState, action) => {
-
     switch (action.type) {
         case VISIBLE_DROPDOWN:
             return {...state, visibleDropDown: action.payload}
 
-        default: return state
+        case SET_ACTIVE_CATEGORY:
+            return {...state, activeCategory: action.payload}
+        case SET_PIZZA_ITEMS:
+            return {...state, pizzaItems: action.payload}
+
+        default:
+            return state
     }
 }
 
-export const setVisibleDropDown = (toggle) => {
-    //debugger
-    console.log('toggle: ', toggle)
-    return {type: VISIBLE_DROPDOWN, payload: toggle}
-}
+export const setVisibleDropDown = (toggle) => ({type: VISIBLE_DROPDOWN, payload: toggle})
+export const setActiveCategory = (categoryName) => {
 
+    return {type: SET_ACTIVE_CATEGORY, payload: categoryName}
+}
+export const setPizzaItems = (pizzas) => {
+
+    return {type: SET_PIZZA_ITEMS, payload: pizzas}
+}
 
 export default homeReducer
