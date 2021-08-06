@@ -1,13 +1,22 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
+import {setActiveSortType} from "./Redux/home-reducer";
+import {useDispatch} from "react-redux";
 
-const SortDropDown = ({dropDownToggle, visibleDropDown}) => {
+const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) => {
 
-    const sortTypeItems = ['популярности', 'цене', 'алфавиту']
+    const dispatch = useDispatch()
 
-    const [activeSortType, setActiveSortType] = useState(sortTypeItems[0])
+    const translation = {
+        'popular': 'популярности',
+        'price': 'цене',
+        'a-z': 'алфавиту'
+    }
+
 
     const sortTypeClickHandler = (sortItemName) => {
-        setActiveSortType(sortItemName)
+        console.log('sortItemName: ', sortItemName)
+        dispatch(setActiveSortType(sortItemName))
+
         dropDownToggle(false)
     }
 
@@ -21,7 +30,9 @@ const SortDropDown = ({dropDownToggle, visibleDropDown}) => {
 
     useEffect(() => {
         document.body.addEventListener('click', handleOutsideClick)
+        //dispatch(setActiveSortType(translation['popular']))
     }, [])
+
 
 
     return (
@@ -41,11 +52,11 @@ const SortDropDown = ({dropDownToggle, visibleDropDown}) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => dropDownToggle(!visibleDropDown)}>{activeSortType}</span>
+                <span onClick={() => dropDownToggle(!visibleDropDown)}>{sortBy}</span>
             </div>
             {visibleDropDown && <div className="sort__popup">
                 <ul>
-                    {sortTypeItems && sortTypeItems.map(sortItemName => <li onClick={() => sortTypeClickHandler(sortItemName)} className={activeSortType === sortItemName ? "active" : ""} key={sortItemName}>{sortItemName}</li>)}
+                    {sortTypeItems && sortTypeItems.map(sortItemName => <li onClick={() => sortTypeClickHandler(translation[sortItemName])} className={sortBy === sortItemName ? "active" : ""} key={sortItemName}>{translation[sortItemName]}</li>)}
                 </ul>
             </div>}
         </div>

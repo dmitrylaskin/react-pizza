@@ -3,7 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 
 const PizzaBlock = ({pizzaItem}) => {
-    
+
     const pizzaTypes = ["традиционное", "тонкое"]
     const [activePizzaType, setActivePizzaType] = useState(0)
     const [activePizzaSize, setActivePizzaSize] = useState(pizzaItem.sizes[0])
@@ -14,6 +14,7 @@ const PizzaBlock = ({pizzaItem}) => {
     const onChangeSize = (size) => {
         setActivePizzaSize(size)
     }
+
     return (
         <div key={pizzaItem.id} className="pizza-block">
             <img
