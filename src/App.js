@@ -9,13 +9,18 @@ import {useDispatch, useSelector} from "react-redux";
 
 const App = () => {
 
-    const { activeCategory } = useSelector(({homePage}) => ({activeCategory: homePage.activeCategory}))
+    const { activeCategory, sortBy } = useSelector(({homePage}) => {
+        return {
+            activeCategory: homePage.activeCategory,
+            sortBy: homePage.sortBy
+        }
+    })
 
     const dispatch = useDispatch()
 
   useEffect(() => {
-      dispatch(getPizzaItems())
-  }, [activeCategory])
+      dispatch(getPizzaItems(activeCategory, sortBy))
+  }, [activeCategory, sortBy])
 
   return (
       <div className="wrapper">

@@ -12,7 +12,7 @@ function* homePageDataSaga(action) {
     try {
         yield put(showLoader(true))
 
-        let response = yield call(homeAPI.getPizzas)
+        let response = yield call(homeAPI.getPizzas, action.payload.activeCategory, action.payload.sortBy)
 
         yield put(showLoader(false))
 

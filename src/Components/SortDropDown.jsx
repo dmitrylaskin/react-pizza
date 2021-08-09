@@ -9,12 +9,11 @@ const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) 
     const translation = {
         'popular': 'популярности',
         'price': 'цене',
-        'a-z': 'алфавиту'
+        'name': 'алфавиту'
     }
 
 
     const sortTypeClickHandler = (sortItemName) => {
-        console.log('sortItemName: ', sortItemName)
         dispatch(setActiveSortType(sortItemName))
 
         dropDownToggle(false)
@@ -30,7 +29,6 @@ const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) 
 
     useEffect(() => {
         document.body.addEventListener('click', handleOutsideClick)
-        //dispatch(setActiveSortType(translation['popular']))
     }, [])
 
 
@@ -52,11 +50,11 @@ const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) 
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => dropDownToggle(!visibleDropDown)}>{sortBy}</span>
+                <span onClick={() => dropDownToggle(!visibleDropDown)}>{translation[sortBy]}</span>
             </div>
             {visibleDropDown && <div className="sort__popup">
                 <ul>
-                    {sortTypeItems && sortTypeItems.map(sortItemName => <li onClick={() => sortTypeClickHandler(translation[sortItemName])} className={sortBy === sortItemName ? "active" : ""} key={sortItemName}>{translation[sortItemName]}</li>)}
+                    {sortTypeItems && sortTypeItems.map(sortItemName => <li onClick={() => sortTypeClickHandler(sortItemName)} className={sortBy === sortItemName ? "active" : ""} key={sortItemName}>{translation[sortItemName]}</li>)}
                 </ul>
             </div>}
         </div>

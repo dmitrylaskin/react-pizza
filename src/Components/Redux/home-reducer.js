@@ -8,9 +8,9 @@ export const IS_LOADING = 'IS_LOADING'
 const initialState = {
     visibleDropDown: false,
     categoryItems: ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'],
-    activeCategory: null,
+    activeCategory: 'Все',
     pizzaItems: null,
-    sortTypeItems: ['popular', 'price', 'a-z'],
+    sortTypeItems: ['popular', 'price', 'name'],
     sortBy: 'popular',
     isLoading: false
 }
@@ -35,6 +35,7 @@ const homeReducer = (state = initialState, action) => {
 }
 
 export const setVisibleDropDown = (toggle) => ({type: VISIBLE_DROPDOWN, payload: toggle})
+
 export const setActiveCategory = (categoryName) => {
 
     return {type: SET_ACTIVE_CATEGORY, payload: categoryName}
@@ -51,8 +52,8 @@ export const showLoader = (toggle) => {
 }
 
 //to saga:
-export const getPizzaItems = () => {
-    return {type: GET_PIZZA_ITEMS}
+export const getPizzaItems = (activeCategory, sortBy) => {
+    return {type: GET_PIZZA_ITEMS, payload: {activeCategory, sortBy}}
 }
 
 export default homeReducer
