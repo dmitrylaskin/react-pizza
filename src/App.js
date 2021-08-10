@@ -12,7 +12,7 @@ const App = () => {
     const { activeCategory, sortBy } = useSelector(({homePage}) => {
         return {
             activeCategory: homePage.activeCategory,
-            sortBy: homePage.sortBy
+            sortBy: homePage.sortBy,
         }
     })
 

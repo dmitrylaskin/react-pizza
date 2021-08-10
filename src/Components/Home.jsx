@@ -5,6 +5,7 @@ import PizzaBlock from "./PizzaBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {setActiveCategory, setVisibleDropDown} from "./Redux/home-reducer";
 import MyLoader from "./MyLoader";
+import {addPizza} from "./Redux/cart-reducer";
 
 const Home = () => {
 
@@ -15,6 +16,9 @@ const Home = () => {
     }
     const dropDownToggle = (toggle) => {
         dispatch(setVisibleDropDown(toggle))
+    }
+    const onAddPizza = (pizzaObj) => {
+        dispatch(addPizza(pizzaObj))
     }
 
     const { pizzaItems, visibleDropDown, categoryItems, activeCategory, isLoading, sortBy, sortTypeItems } = useSelector(({ homePage }) => {
@@ -47,7 +51,7 @@ const Home = () => {
 
                     {isLoading
                         ? Array(10).fill(0).map((_, idx) => <MyLoader key={idx}/>)
-                        : pizzaItems && pizzaItems.map(pizzaItem => <PizzaBlock isLoading={isLoading} pizzaItem={pizzaItem} key={pizzaItem.id}/>)}
+                        : pizzaItems && pizzaItems.map(pizzaItem => <PizzaBlock onAddPizza={onAddPizza} pizzaItem={pizzaItem} key={pizzaItem.id}/>)}
 
                 </div>
             </div>

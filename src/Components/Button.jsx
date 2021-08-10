@@ -1,12 +1,12 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 
-const Button = ({btnStyle}) => {
+const Button = ({btnStyle, totalCount, totalPrice}) => {
 
     return (
         <NavLink to={'/cart'}>
         <button className={`button ${btnStyle}`}>
-                <span>520 ₽</span>
+                <span>{totalPrice} ₽</span>
                 <div className="button__delimiter"></div>
                 <svg
                     width="18"
@@ -37,7 +37,7 @@ const Button = ({btnStyle}) => {
                         strokeLinejoin="round"
                     />
                 </svg>
-                <span>3</span>
+                <span>{totalCount}</span>
         </button>
         </NavLink>
     );

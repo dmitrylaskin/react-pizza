@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import AddBtn from "./AddBtn";
 
-const PizzaBlock = ({pizzaItem}) => {
+const PizzaBlock = ({pizzaItem, onAddPizza}) => {
 
     const pizzaTypes = ["традиционное", "тонкое"]
     const [activePizzaType, setActivePizzaType] = useState(0)
@@ -13,6 +14,17 @@ const PizzaBlock = ({pizzaItem}) => {
     }
     const onChangeSize = (size) => {
         setActivePizzaSize(size)
+    }
+    const addPizzaHandler = () => {
+        const pizzaObj = {
+            id: pizzaItem.id,
+            imageUrl: pizzaItem.imageUrl,
+            name: pizzaItem.name,
+            type: activePizzaType,
+            size: activePizzaSize,
+            price: pizzaItem.price,
+        }
+        onAddPizza(pizzaObj)
     }
 
     return (
@@ -37,7 +49,8 @@ const PizzaBlock = ({pizzaItem}) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {pizzaItem.price}</div>
-                <div className="button button--outline button--add">
+
+                <AddBtn id={pizzaItem.id} onClick={addPizzaHandler} className="button--outline button--add">
                     <svg
                         width="12"
                         height="12"
@@ -52,7 +65,8 @@ const PizzaBlock = ({pizzaItem}) => {
                     </svg>
                     <span>Добавить</span>
                     <i>2</i>
-                </div>
+                </AddBtn>
+
             </div>
         </div>
     );
