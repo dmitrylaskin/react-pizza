@@ -3,7 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import AddBtn from "./AddBtn";
 
-const PizzaBlock = ({pizzaItem, onAddPizza}) => {
+const PizzaBlock = ({pizzaItem, onAddPizza, addedPizzaCounter}) => {
 
     const pizzaTypes = ["традиционное", "тонкое"]
     const [activePizzaType, setActivePizzaType] = useState(0)
@@ -64,7 +64,7 @@ const PizzaBlock = ({pizzaItem, onAddPizza}) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
+                    {addedPizzaCounter && <i>{addedPizzaCounter}</i>}
                 </AddBtn>
 
             </div>
