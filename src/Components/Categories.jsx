@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const Categories = ({categoryItems, categoryToggle, activeCategory}) => {
     return (
@@ -11,4 +12,9 @@ const Categories = ({categoryItems, categoryToggle, activeCategory}) => {
     );
 };
 
+Categories.propTypes = {
+    categoryItems: PropTypes.arrayOf(PropTypes.string),
+    categoryToggle: PropTypes.func,
+    activeCategory: PropTypes.string
+}
 export default Categories;

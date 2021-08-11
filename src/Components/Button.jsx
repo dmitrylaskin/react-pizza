@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
+import PropTypes from 'prop-types'
 
 const Button = ({btnStyle, totalCount, totalPrice}) => {
 
@@ -42,5 +43,11 @@ const Button = ({btnStyle, totalCount, totalPrice}) => {
         </NavLink>
     );
 };
+
+Button.propTypes = {
+    btnStyle: PropTypes.string,
+    totalCount: PropTypes.number,
+    totalPrice: PropTypes.number,
+}
 
 export default Button;

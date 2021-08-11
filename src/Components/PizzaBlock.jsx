@@ -3,7 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import AddBtn from "./AddBtn";
 
-const PizzaBlock = ({pizzaItem, onAddPizza, addedPizzaCounter}) => {
+const PizzaBlock = ({pizzaItem, onAddPizza, addedPizzaCount}) => {
 
     const pizzaTypes = ["традиционное", "тонкое"]
     const [activePizzaType, setActivePizzaType] = useState(0)
@@ -64,7 +64,7 @@ const PizzaBlock = ({pizzaItem, onAddPizza, addedPizzaCounter}) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    {addedPizzaCounter && <i>{addedPizzaCounter}</i>}
+                    {addedPizzaCount && <i>{addedPizzaCount}</i>}
                 </AddBtn>
 
             </div>
@@ -82,7 +82,9 @@ PizzaBlock.propTypes = {
         price: PropTypes.number,
         category: PropTypes.number,
         rating: PropTypes.number
-    })
+    }),
+    onAddPizza: PropTypes.func,
+    addedPizzaCount: PropTypes.number
 }
 
 export default PizzaBlock;

@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import {setActiveSortType} from "./Redux/home-reducer";
 import {useDispatch} from "react-redux";
+import PropTypes from "prop-types"
 
 const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) => {
-
     const dispatch = useDispatch()
 
     const translation = {
@@ -60,5 +60,11 @@ const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) 
         </div>
     );
 };
+SortDropDown.propTypes = {
+    dropDownToggle: PropTypes.func,
+    visibleDropDown: PropTypes.bool,
+    sortBy: PropTypes.string,
+    sortTypeItems: PropTypes.arrayOf(PropTypes.string)
+}
 
 export default SortDropDown;

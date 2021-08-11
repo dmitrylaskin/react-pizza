@@ -52,7 +52,7 @@ const Home = () => {
 
                     {isLoading
                         ? Array(10).fill(0).map((_, idx) => <MyLoader key={idx}/>)
-                        : pizzaItems && pizzaItems.map(pizzaItem => <PizzaBlock addedPizzaCounter={addedPizzas[pizzaItem.id] && addedPizzas[pizzaItem.id].length} onAddPizza={onAddPizza} pizzaItem={pizzaItem} key={pizzaItem.id}/>)}
+                        : pizzaItems && pizzaItems.map(pizzaItem => <PizzaBlock addedPizzaCount={addedPizzas[pizzaItem.id] && addedPizzas[pizzaItem.id].length} onAddPizza={onAddPizza} pizzaItem={pizzaItem} key={pizzaItem.id}/>)}
 
                 </div>
             </div>
