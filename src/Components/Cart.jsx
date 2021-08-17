@@ -1,12 +1,22 @@
 import React from 'react';
 import CartItem from "./CartItem";
 import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {cleanCart} from "./Redux/cart-reducer";
+import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
 
+    const dispatch = useDispatch()
+
     const { addedPizzas, totalPrice, totalCount } = useSelector(({cartPage}) => cartPage)
     console.log('addedPizzas', addedPizzas)
+
+    const onCleanCart = () => {
+        if (window.confirm('Очистить корзину?')) {
+            dispatch(cleanCart())
+        }
+    }
     
     const pizzaGroups = Object.keys(addedPizzas).map(key => {
         return addedPizzas[key].items[0]
@@ -15,7 +25,7 @@ const Cart = () => {
 
     return (
         <div className="container container--cart">
-            <div className="cart">
+            {!pizzaGroups.length ? <EmptyCart/> : <div className="cart">
                 <div className="cart__top">
                     <h2 className="content__title">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,13 +54,18 @@ const Cart = () => {
                                   strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
 
-                        <span>Очистить корзину</span>
+                        <span onClick={onCleanCart}>Очистить корзину</span>
                     </div>
                 </div>
 
                 <div className="content__items">
 
-                    {pizzaGroups.map(pizzaItem => <CartItem key={pizzaItem.id} name={pizzaItem.name} size={pizzaItem.size} type={pizzaItem.type} price={addedPizzas[pizzaItem.id].totalPrice} />)}
+                    {pizzaGroups.map(pizzaItem => <CartItem key={pizzaItem.id}
+                                                            name={pizzaItem.name}
+                                                            size={pizzaItem.size}
+                                                            type={pizzaItem.type}
+                                                            price={addedPizzas[pizzaItem.id].price}
+                                                            count={addedPizzas[pizzaItem.id].items.length}/>)}
 
                 </div>
 
@@ -79,7 +94,7 @@ const Cart = () => {
                     </div>
 
                 </div>
-            </div>
+            </div>}
         </div>
     );
 };

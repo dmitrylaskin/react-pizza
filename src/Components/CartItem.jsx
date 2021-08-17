@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import {pizzaTypes} from "../utils/constants";
 
-const CartItem = ({name, size, price, type}) => {
+const CartItem = ({name, size, price, type, count}) => {
+    console.log('price: ', price)
     return (
         <div className="cart__item">
             <div className="cart__item-img">
@@ -29,7 +30,7 @@ const CartItem = ({name, size, price, type}) => {
                     </svg>
 
                 </div>
-                <b>2</b>
+                <b>{count}</b>
                 <div className="button button--outline button--circle cart__item-count-plus">
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +69,8 @@ CartItem.propTypes = {
     name: PropTypes.string,
     size: PropTypes.number,
     price: PropTypes.number,
-    type: PropTypes.number
+    type: PropTypes.number,
+    count: PropTypes.number
 }
 
 export default CartItem;

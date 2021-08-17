@@ -1,4 +1,5 @@
 const ADD_PIZZA = 'ADD_PIZZA'
+const CLEAN_CART = 'CLEAN_CART'
 
 const initialState = {
     addedPizzas: {},
@@ -23,6 +24,12 @@ const cartReducer = (state=initialState, action) => {
                 totalCount: [].concat.apply([], items).length,
                 totalPrice: addedItems.reduce((sum, value) => value.price + sum, 0)
             }
+        case CLEAN_CART:
+            return {
+                addedPizzas: {},
+                totalPrice: 0,
+                totalCount: 0
+            }
 
         default: return state
 
@@ -35,5 +42,6 @@ export const addPizza = (pizzaObj) => {
         payload: pizzaObj
     }
 }
+export const cleanCart = () => ({type: CLEAN_CART})
 
 export default cartReducer
