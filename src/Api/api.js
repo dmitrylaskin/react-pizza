@@ -11,7 +11,7 @@ const categoryToIdx = {
 
 export const homeAPI = {
     getPizzas(activeCategory, sortBy) {
-        return axios.get(`http://localhost:3004/pizzas?${
+        return axios.get(`/pizzas?${
             categoryToIdx[activeCategory] > 0 ? `category=${categoryToIdx[activeCategory]}` : ''
         }&_sort=${sortBy}&_order=${sortBy === 'name' ? 'asc' : 'desc'}`)
     }

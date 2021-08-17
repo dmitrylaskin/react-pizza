@@ -8,16 +8,19 @@ const initialState = {
 const cartReducer = (state=initialState, action) => {
     switch (action.type) {
         case ADD_PIZZA:
-            const newItem = {
+            const currentPizzaItems = !state.addedPizzas[action.payload.id] ? [action.payload] : [...state.addedPizzas[action.payload.id].items, action.payload]
+            const newItems = {
                 ...state.addedPizzas,
-                [action.payload.id]: !state.addedPizzas[action.payload.id] ? [action.payload] : [...state.addedPizzas[action.payload.id], action.payload]
+                [action.payload.id]: {items: currentPizzaItems, price: currentPizzaItems.reduce((sum, value) => value.price + sum, 0)}
             }
-            const addedItems = [].concat.apply([], Object.values(newItem))
+            const addedItems = [].concat.apply([], Object.values(newItems))
+            const items = Object.values(newItems).map(obj => obj.items)
+
 
             return {
                 ...state,
-                addedPizzas: newItem,
-                totalCount: [].concat.apply([], Object.values(newItem)).length,
+                addedPizzas: newItems,
+                totalCount: [].concat.apply([], items).length,
                 totalPrice: addedItems.reduce((sum, value) => value.price + sum, 0)
             }
 

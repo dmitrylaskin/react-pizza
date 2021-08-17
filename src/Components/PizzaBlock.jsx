@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 import AddBtn from "./AddBtn";
+import {pizzaTypes} from "../utils/constants";
 
 const PizzaBlock = ({pizzaItem, onAddPizza, addedPizzaCount}) => {
 
-    const pizzaTypes = ["традиционное", "тонкое"]
     const [activePizzaType, setActivePizzaType] = useState(0)
     const [activePizzaSize, setActivePizzaSize] = useState(pizzaItem.sizes[0])
 

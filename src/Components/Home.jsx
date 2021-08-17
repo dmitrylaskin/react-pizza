@@ -35,6 +35,43 @@ const Home = () => {
     })
 
     const { addedPizzas } = useSelector(({ cartPage }) => ({addedPizzas : cartPage.addedPizzas}))
+    console.log('addedPizzas: ', addedPizzas)
+    // {
+    //     "3": {
+    //         "items": [
+    //             {
+    //                 "id": 3,
+    //                 "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/af553bf5-3887-4501-b88e-8f0f55229429.jpg",
+    //                 "name": "Кисло-сладкий цыпленок",
+    //                 "type": 0,
+    //                 "size": 26,
+    //                 "price": 275
+    //             }
+    //         ],
+    //         "price": 275
+    //     },
+    //     "8": {
+    //         "items": [
+    //             {
+    //                 "id": 8,
+    //                 "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/ec29465e-606b-4a04-a03e-da3940d37e0e.jpg",
+    //                 "name": "Четыре сезона",
+    //                 "type": 0,
+    //                 "size": 26,
+    //                 "price": 395
+    //             },
+    //             {
+    //                 "id": 8,
+    //                 "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/ec29465e-606b-4a04-a03e-da3940d37e0e.jpg",
+    //                 "name": "Четыре сезона",
+    //                 "type": 0,
+    //                 "size": 26,
+    //                 "price": 395
+    //             }
+    //         ],
+    //         "price": 790
+    //     }
+    // }
 
 
     return (
@@ -52,7 +89,7 @@ const Home = () => {
 
                     {isLoading
                         ? Array(10).fill(0).map((_, idx) => <MyLoader key={idx}/>)
-                        : pizzaItems && pizzaItems.map(pizzaItem => <PizzaBlock addedPizzaCount={addedPizzas[pizzaItem.id] && addedPizzas[pizzaItem.id].length} onAddPizza={onAddPizza} pizzaItem={pizzaItem} key={pizzaItem.id}/>)}
+                        : pizzaItems && pizzaItems.map(pizzaItem => <PizzaBlock addedPizzaCount={addedPizzas[pizzaItem.id] && addedPizzas[pizzaItem.id].items.length} onAddPizza={onAddPizza} pizzaItem={pizzaItem} key={pizzaItem.id}/>)}
 
                 </div>
             </div>
