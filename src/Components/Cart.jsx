@@ -31,7 +31,6 @@ const Cart = () => {
     const pizzaGroups = Object.keys(addedPizzas).map(key => {
         return addedPizzas[key].items[0]
     })
-    console.log('addedPizzas: ', addedPizzas)
 
     return (
         <div className="container container--cart">

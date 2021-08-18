@@ -35,7 +35,6 @@ const Home = () => {
     })
 
     const { addedPizzas } = useSelector(({ cartPage }) => ({addedPizzas : cartPage.addedPizzas}))
-    console.log('addedPizzas: ', addedPizzas)
 
 
     return (

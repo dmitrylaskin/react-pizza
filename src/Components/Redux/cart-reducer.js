@@ -48,8 +48,7 @@ const cartReducer = (state=initialState, action) => {
             }
         case ADD_GROUP_PIZZA_ITEM:
             const groupPizzaItemsPlus = [...state.addedPizzas[action.payload].items, state.addedPizzas[action.payload].items[0]]
-            // const addedItemsA = [].concat.apply([], Object.values(groupPizzaItemsPlus))
-            // const itemsA = Object.values(groupPizzaItemsPlus).map(obj => obj.items)
+
             return {
                 ...state,
                 addedPizzas: {
@@ -60,8 +59,8 @@ const cartReducer = (state=initialState, action) => {
                         price: groupPizzaItemsPlus.reduce((sum, value) => value.price + sum, 0)
                     }
                 },
-                // totalCount: [].concat.apply([], itemsA).length,
-                // totalPrice: addedItemsA.reduce((sum, value) => value.price + sum, 0)
+                // totalCount: ?
+                // totalPrice: ?
             }
         case REMOVE_GROUP_PIZZA_ITEM:
             const groupPizzaItemsMinus = state.addedPizzas[action.payload].items.length === 1 ? state.addedPizzas[action.payload].items : [...state.addedPizzas[action.payload].items.slice(1)]
@@ -75,6 +74,8 @@ const cartReducer = (state=initialState, action) => {
                         price: groupPizzaItemsMinus.reduce((sum, value) => value.price + sum, 0)
                     }
                 },
+                // totalCount: ?
+                // totalPrice: ?
             }
 
         default: return state
