@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const AddBtn = ({onClick, className, outline, children}) => {
     return (
-        <button onClick={onClick} className={cn('button', className, {'button-outline': outline})}>
+        <button onClick={onClick} className={cn('button', {'button-outline': outline}, className)}>
             {children}
         </button>
     );

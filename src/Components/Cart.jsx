@@ -2,7 +2,7 @@ import React from 'react';
 import CartItem from "./CartItem";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {cleanCart} from "./Redux/cart-reducer";
+import {addGroupPizzaItem, cleanCart, removeGroupPizzaItem, removePizzaGroup} from "./Redux/cart-reducer";
 import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
@@ -10,18 +10,28 @@ const Cart = () => {
     const dispatch = useDispatch()
 
     const { addedPizzas, totalPrice, totalCount } = useSelector(({cartPage}) => cartPage)
-    console.log('addedPizzas', addedPizzas)
 
     const onCleanCart = () => {
         if (window.confirm('Очистить корзину?')) {
             dispatch(cleanCart())
         }
     }
+    const onRemoveCartItem = (id) => {
+        dispatch(removePizzaGroup(id))
+        console.log(id)
+
+    }
+    const onAddGroupPizzaItem = (id) => {
+        dispatch(addGroupPizzaItem(id))
+    }
+    const onRemoveGroupPizzaItem = (id) => {
+        dispatch(removeGroupPizzaItem(id))
+    }
     
     const pizzaGroups = Object.keys(addedPizzas).map(key => {
         return addedPizzas[key].items[0]
     })
-    console.log('pizzaGroups', pizzaGroups)
+    console.log('addedPizzas: ', addedPizzas)
 
     return (
         <div className="container container--cart">
@@ -61,11 +71,15 @@ const Cart = () => {
                 <div className="content__items">
 
                     {pizzaGroups.map(pizzaItem => <CartItem key={pizzaItem.id}
+                                                            id={pizzaItem.id}
                                                             name={pizzaItem.name}
                                                             size={pizzaItem.size}
                                                             type={pizzaItem.type}
                                                             price={addedPizzas[pizzaItem.id].price}
-                                                            count={addedPizzas[pizzaItem.id].items.length}/>)}
+                                                            count={addedPizzas[pizzaItem.id].items.length}
+                                                            onRemoveCartItem={onRemoveCartItem}
+                                                            onAddGroupPizzaItem={onAddGroupPizzaItem}
+                                                            onRemoveGroupPizzaItem={onRemoveGroupPizzaItem}/>)}
 
                 </div>
 
