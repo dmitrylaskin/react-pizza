@@ -18,7 +18,6 @@ const Cart = () => {
     }
     const onRemoveCartItem = (id) => {
         dispatch(removePizzaGroup(id))
-        console.log(id)
 
     }
     const onAddGroupPizzaItem = (id) => {

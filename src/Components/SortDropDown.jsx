@@ -1,37 +1,34 @@
 import React, {useEffect, useRef} from 'react';
-import {setActiveSortType} from "./Redux/home-reducer";
+import {setActiveSortType, setVisibleDropDown} from "./Redux/home-reducer";
 import {useDispatch} from "react-redux";
 import PropTypes from "prop-types"
+import {translation} from "../utils/constants";
 
 const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) => {
     const dispatch = useDispatch()
 
-    const translation = {
-        'popular': 'популярности',
-        'price': 'цене',
-        'name': 'алфавиту'
-    }
-
-
     const sortTypeClickHandler = (sortItemName) => {
         dispatch(setActiveSortType(sortItemName))
-
         dropDownToggle(false)
     }
 
     const sortRef = useRef()
 
-    const handleOutsideClick = (event) => {
-        if (!event.path.includes(sortRef.current)) {
-            dropDownToggle(false)
-        }
+    const dropDownMenuHandler = () => {
+        dispatch(setVisibleDropDown(true))
     }
 
     useEffect(() => {
-        document.body.addEventListener('click', handleOutsideClick)
-    }, [])
-
-
+        const handleOutsideClick = (event) => {
+            if (visibleDropDown && sortRef.current && !sortRef.current.contains(event.target)) {
+                dropDownToggle(false)
+            }
+        }
+        document.body.addEventListener('mousedown', handleOutsideClick)
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick)
+        }
+    }, [visibleDropDown])
 
     return (
         <div className="sort" ref={elem => sortRef.current = elem}>
@@ -50,7 +47,7 @@ const SortDropDown = ({dropDownToggle, visibleDropDown, sortBy, sortTypeItems}) 
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => dropDownToggle(!visibleDropDown)}>{translation[sortBy]}</span>
+                <span onClick={dropDownMenuHandler}>{translation[sortBy]}</span>
             </div>
             {visibleDropDown && <div className="sort__popup">
                 <ul>

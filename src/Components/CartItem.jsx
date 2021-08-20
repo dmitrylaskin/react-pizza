@@ -14,7 +14,6 @@ const CartItem = ({name, size, price, type, count, id, onRemoveCartItem, onAddGr
         onRemoveGroupPizzaItem(id)
     }
 
-
     return (
         <div className="cart__item">
             <div className="cart__item-img">

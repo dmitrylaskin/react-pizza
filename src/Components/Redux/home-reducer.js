@@ -34,26 +34,16 @@ const homeReducer = (state = initialState, action) => {
     }
 }
 
-export const setVisibleDropDown = (toggle) => ({type: VISIBLE_DROPDOWN, payload: toggle})
+export const setVisibleDropDown = (toggle) => {
 
-export const setActiveCategory = (categoryName) => {
-
-    return {type: SET_ACTIVE_CATEGORY, payload: categoryName}
+    return {type: VISIBLE_DROPDOWN, payload: toggle}
 }
-export const setActiveSortType = (sortType) => {
-    return {type: SET_SORT_TYPE, payload: sortType}
-}
-export const setPizzaItems = (pizzas) => {
-
-    return {type: SET_PIZZA_ITEMS, payload: pizzas}
-}
-export const showLoader = (toggle) => {
-    return {type: IS_LOADING, payload: toggle}
-}
+export const setActiveCategory = (categoryName) => ({type: SET_ACTIVE_CATEGORY, payload: categoryName})
+export const setActiveSortType = (sortType) => ({type: SET_SORT_TYPE, payload: sortType})
+export const setPizzaItems = (pizzas) => ({type: SET_PIZZA_ITEMS, payload: pizzas})
+export const showLoader = (toggle) => ({type: IS_LOADING, payload: toggle})
 
 //to saga:
-export const getPizzaItems = (activeCategory, sortBy) => {
-    return {type: GET_PIZZA_ITEMS, payload: {activeCategory, sortBy}}
-}
+export const getPizzaItems = (activeCategory, sortBy) => ({type: GET_PIZZA_ITEMS, payload: {activeCategory, sortBy}})
 
 export default homeReducer
